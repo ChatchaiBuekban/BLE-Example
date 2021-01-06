@@ -12,7 +12,7 @@ import com.chatchai.android.ble_example.service.BluetoothService
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var service: BluetoothService
+    lateinit var mBluetoothService: BluetoothService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             //service connected
             Log.d("BLETAG","Service Connected")
+            val binder = service as BluetoothService.LocalServiceBinder
+            mBluetoothService = binder.getService()
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {

@@ -13,7 +13,7 @@ class BluetoothService : Service() {
        return  binder
     }
 
-    private inner  class  LocalServiceBinder : Binder(){
+    inner  class  LocalServiceBinder : Binder(){
         fun getService():BluetoothService = this@BluetoothService
     }
 }
