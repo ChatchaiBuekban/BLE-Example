@@ -25,7 +25,7 @@
 
 -BluetoothService.kt
 
-class BluetoothService : Service() {
+> class BluetoothService : Service() {
 
     private val binder = LocalServiceBinder()
 
@@ -36,7 +36,7 @@ class BluetoothService : Service() {
     private inner  class  LocalServiceBinder : Binder(){
         fun getService():BluetoothService = this@BluetoothService
     }
-}
+>}
    
     
 
