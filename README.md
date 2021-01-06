@@ -2,8 +2,9 @@
 
 ## Create Service
 
-1 Add Service to Project and enable it in AndroidManifest.xml file (if you add service manual)
+1 Create BluetoothService class with Service inheritance to project and enable it in AndroidManifest.xml file (if you add service manual)
 
+- AndroidManifest.xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.chatchai.android.ble_example">
@@ -21,7 +22,22 @@
     </application>
 
 </manifest>
+
+-BluetoothService.kt
+
+class BluetoothService : Service() {
+
+    private val binder = LocalServiceBinder()
+
+    override fun onBind(intent: Intent): IBinder {
+       return  binder
+    }
+
+    private inner  class  LocalServiceBinder : Binder(){
+        fun getService():BluetoothService = this@BluetoothService
+    }
+}
    
     
-    
+
     
