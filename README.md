@@ -66,6 +66,8 @@ class MainActivity : AppCompatActivity() {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             //service connected
             Log.d("BLETAG","Service Connected")
+            val binder = service as BluetoothService.LocalServiceBinder
+            mBluetoothService = binder.getService()
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
