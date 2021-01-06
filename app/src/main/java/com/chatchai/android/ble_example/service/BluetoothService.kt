@@ -16,6 +16,9 @@ class BluetoothService : Service() {
 
     var connectionState = STATE_DISCONNECTED
 
+    @ExperimentalUnsignedTypes
+    var heartRate = 0
+
     companion object{
         val CUSTOM_SERVICE_UUID  = UUID.fromString("0000FA00-0000-1000-8000-00805F9B34FB")
         val CUSTOM_CHARACTERISTIC_UUID = UUID.fromString("0000FA01-0000-1000-8000-00805F9B34FB")
@@ -127,7 +130,8 @@ class BluetoothService : Service() {
         sendBroadcast(intent)
     }
 
-    private fun  broadcastUpdate(action: String,characteristic:BluetoothGattCharacteristic?){
+    @ExperimentalUnsignedTypes
+    private fun  broadcastUpdate(action: String, characteristic:BluetoothGattCharacteristic?){
 
         val intent = Intent(action)
 
@@ -142,7 +146,7 @@ class BluetoothService : Service() {
                         BluetoothGattCharacteristic.FORMAT_UINT8
                     }
                 }
-                val heartRate = characteristic?.getIntValue(format,1)
+                heartRate = characteristic?.getIntValue(format,1)!!
                 Log.d("BLETAG", String.format("heart rate: %d", heartRate))
             }
             CUSTOM_CHARACTERISTIC_UUID->{

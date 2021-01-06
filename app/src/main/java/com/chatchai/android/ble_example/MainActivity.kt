@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothGattCharacteristic
 import android.bluetooth.BluetoothManager
 import android.bluetooth.le.*
 import android.content.*
@@ -19,6 +20,7 @@ import com.chatchai.android.ble_example.databinding.ActivityMainBinding
 import com.chatchai.android.ble_example.service.BluetoothService
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.experimental.and
 
 class MainActivity : AppCompatActivity() {
 
@@ -180,6 +182,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @ExperimentalUnsignedTypes
     private val receiver = object : BroadcastReceiver(){
         @SuppressLint("SetTextI18n")
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -201,7 +204,17 @@ class MainActivity : AppCompatActivity() {
                         connectButton.text = "Connect"
                     }
                 }
+                BluetoothService.ACTION_DATA_AVAILABLE -> {
+                    val bytes = intent.getByteArrayExtra(BluetoothService.EXTRA_DATA)
+                    val heartRate = mBluetoothService.heartRate
+                    with(mBinding){
+                        hearRateTextview.text  = "$heartRate BPM"
+                    }
+                    //show heat rate in view
+                    //TO DO RR-Interval byte[3] or byte[4] .... byte[n] ref. https://stackoverflow.com/questions/52882552/getting-heart-rate-variability-from-polar-h10-uwp/52935617
+                }
             }
         }
     }
+
 }
