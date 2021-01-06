@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun onServiceDisconnected(name: ComponentName?) {
+            //service disconnected
             Log.d("BLETAG","Service Disconnected")
         }
     }

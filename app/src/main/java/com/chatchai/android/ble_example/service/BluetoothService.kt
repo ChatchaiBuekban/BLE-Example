@@ -10,7 +10,7 @@ class BluetoothService : Service() {
     private val binder = LocalServiceBinder()
 
     override fun onBind(intent: Intent): IBinder {
-        TODO("Return the communication channel to the service.")
+       return  binder
     }
 
     private inner  class  LocalServiceBinder : Binder(){
